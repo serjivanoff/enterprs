@@ -5,12 +5,16 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name="user")
+@NamedQueries({@NamedQuery(name=User.ALL_USERS, query="SELECT u FROM User u ORDER by u.firstName"),
+               @NamedQuery(name=User.DELETE_USER, query="DELETE FROM User u WHERE u.id=:id")})
 public class User extends BaseEntity{
-
+    public static final String DELETE_USER = "User.delete";
+    public static final String ALL_USERS = "User.getAll";
     @Column(name = "firstname")
     @NotBlank
     private String firstName;
@@ -33,8 +37,13 @@ public class User extends BaseEntity{
     @Column(name = "registered", columnDefinition = "timestamp default now()")
     private Date registered;
 
-    @ManyToOne
-    Set<Role> roles;
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name="user_roles",joinColumns = @JoinColumn(name="user_id"))
+    @Column(name = "role")
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<Role> roles;
+    @OneToMany(mappedBy="user")
+    private List<Contact> contacts;
 
     public User() {
     }
@@ -94,5 +103,8 @@ public class User extends BaseEntity{
 
     public void setRegistered(Date registered) {
         this.registered = registered;
+    }
+    public boolean isNew(){
+        return this.getId()<0;
     }
 }
