@@ -30,5 +30,6 @@
     </c:forEach>
 
 </table>
+<a href="/users/user" >Click Here!</a>
 </body>
 </html>
