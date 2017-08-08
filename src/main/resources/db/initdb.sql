@@ -10,7 +10,8 @@ CREATE TABLE user(
   lastname VARCHAR(255)NOT NULL,
   age INT not NULL ,
   experience INT not NULL ,
-  registered TIMESTAMP DEFAULT now()
+  registered TIMESTAMP DEFAULT now(),
+  password VARCHAR(255) default '123456'
 );
 
 CREATE TABLE addresses(

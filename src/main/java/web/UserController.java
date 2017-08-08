@@ -14,7 +14,7 @@ import service.UserService;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping(value = "/view/{id}")
     public String view(Model model, @PathVariable int id){

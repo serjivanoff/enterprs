@@ -13,12 +13,48 @@ import java.util.Set;
 @Table(name="user")
 @NamedQueries({@NamedQuery(name=User.ALL_USERS, query="SELECT u FROM User u ORDER BY u.id"),
                @NamedQuery(name=User.DELETE_USER, query="DELETE FROM User u WHERE u.id=:id"),
-               @NamedQuery(name=User.GET_WITH_CONTACTS, query="SELECT u FROM User u LEFT JOIN FETCH u.contacts WHERE u.id=:id")})
+               @NamedQuery(name=User.GET_WITH_CONTACTS, query="SELECT u FROM User u LEFT JOIN FETCH u.contacts WHERE u.id=:id"),
+               @NamedQuery(name=User.GET_BY_LOGIN, query="select u from User u left join fetch u.conatcts where u.login=:login")})
 
 public class User extends BaseEntity{
     public static final String DELETE_USER = "User.delete";
     public static final String ALL_USERS = "User.getAll";
     public static final String GET_WITH_CONTACTS = "User.getWithContact";
+    public static final String GET_BY_LOGIN = "User.getByLogin";
+
+    @Column(name="password")
+    private String password;
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    @Column(name="login")
+    private String login;
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    @Transient
+    private String confirmPassword;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Column(name = "firstname")
     @NotBlank
     private String firstName;

@@ -35,13 +35,18 @@ public class UserDaoImpl implements UserDao {
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public User save(User user) {
-        if(user.isNew())em.persist(user); else
+        if(user.isNew()){
+            em.persist(user);} else
         {return em.merge(user);}
         return user;
     }
-
     @Override
     public User getWithContact(int id) {
         return em.createNamedQuery(User.GET_WITH_CONTACTS,User.class).setParameter("id",id).getSingleResult();
+    }
+
+    @Override
+    public User getByLogin(String login) {
+        return em.createNamedQuery(User.GET_BY_LOGIN,User.class).setParameter("login",login).getSingleResult();
     }
 }

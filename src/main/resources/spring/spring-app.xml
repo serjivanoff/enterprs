@@ -8,10 +8,10 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <import resource="spring-security.xml"/>
     <tx:annotation-driven transaction-manager="transactionManager"/>
-
     <context:annotation-config/>
-    <context:component-scan base-package="dao,service" />
+    <context:component-scan base-package="dao,service,validator" />
 
     <!--org.apache.tomcat.jdbc.pool.DataSource-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
@@ -45,4 +45,6 @@
           class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
+
+
 </beans>
