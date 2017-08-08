@@ -1,27 +1,28 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-    <title>Title</title>
+    <title>${user.firstName}</title>
 </head>
 <body>
 <h2> Кириллица отображается? </h2>
-<jsp:useBean id="user" class="model.User"/>
-<form method="post" action = "adduser">
-    <input type="hidden" name="id" value=${"user.id"}>
+<form:form method="post" action = "/users/adduser" modelAttribute="userForm">
+    <form:input path="id" hidden="true"/>
     <dl>
         <dt>First Name</dt>
-        <dd><input type="text" name="firstName"></dd>
+        <dd><form:input path="firstName"/></dd>
         <dt>Middle Name</dt>
-        <dd><input type="text" name="middleName"></dd>
+        <dd><form:input path="middleName" /></dd>
         <dt>Last Name</dt>
-        <dd><input type="text" name="lastName"></dd>
+        <dd><form:input path="lastName" /></dd>
         <dt>Age</dt>
-        <dd><input type="text" name="age"></dd>
+        <dd><form:input path="age" /></dd>
         <dt>Experience</dt>
-        <dd><input type="text" name="experience"></dd>
+        <dd><form:input path="experience"/></dd>
+        <dt>Registered</dt>
+        <dd><form:input path="registered" /></dd>
     </dl>
-    <button type="submit">Add</button>
-</form>
+    <button type="submit">Create or Update</button>
+</form:form>
 </body>
 </html>

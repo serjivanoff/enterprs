@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
@@ -16,7 +15,6 @@
     <th>Age</th>
     <th>Experience</th>
     <th>Registered</th>
-    <th>Role</th>
     </tr>
     <c:forEach items="${users}" var="user">
         <tr>
@@ -25,11 +23,14 @@
             <td>${user.age}</td>
             <td>${user.experience}</td>
             <td>${user.registered}</td>
-            <td></td>
+            <td><a href="/users/edit/${user.id}">EDIT</a></td>
+            <td><a href="/users/delete/${user.id}">DELETE</a></td>
+            <td><a href="/users/view/${user.id}">View contacts</a></td>
         </tr>
     </c:forEach>
 
 </table>
-<a href="/users/user" >Click Here!</a>
+<h2><a href="/users/user" >Add user</a></h2>
+
 </body>
 </html>

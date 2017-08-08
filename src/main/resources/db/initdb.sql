@@ -23,7 +23,7 @@ CREATE TABLE user(
 CREATE TABLE user_roles(
   user_id INT NOT NULL,
   role VARCHAR(20),
-  FOREIGN KEY (user_id) REFERENCES user(id)
+  FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
 CREATE TABLE contacts(
