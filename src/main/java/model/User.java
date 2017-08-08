@@ -1,5 +1,6 @@
 package model;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import javax.persistence.*;
@@ -10,12 +11,14 @@ import java.util.Set;
 
 @Entity
 @Table(name="user")
-@NamedQueries({@NamedQuery(name=User.ALL_USERS, query="SELECT u FROM User u ORDER by u.firstName"),
-               @NamedQuery(name=User.DELETE_USER, query="DELETE FROM User u WHERE u.id=:id")})
+@NamedQueries({@NamedQuery(name=User.ALL_USERS, query="SELECT u FROM User u ORDER BY u.id"),
+               @NamedQuery(name=User.DELETE_USER, query="DELETE FROM User u WHERE u.id=:id"),
+               @NamedQuery(name=User.GET_WITH_CONTACTS, query="SELECT u FROM User u LEFT JOIN FETCH u.contacts WHERE u.id=:id")})
 
 public class User extends BaseEntity{
     public static final String DELETE_USER = "User.delete";
     public static final String ALL_USERS = "User.getAll";
+    public static final String GET_WITH_CONTACTS = "User.getWithContact";
     @Column(name = "firstname")
     @NotBlank
     private String firstName;
@@ -42,7 +45,9 @@ public class User extends BaseEntity{
     @CollectionTable(name="user_roles", joinColumns = @JoinColumn(name="user_id"))
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
+    @BatchSize(size = 100)
     private Set<Role> roles;
+
     @OneToMany(mappedBy="user")
     private List<Contact> contacts;
 

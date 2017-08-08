@@ -13,12 +13,12 @@ CREATE TABLE user(
   registered TIMESTAMP DEFAULT now()
 );
 
-# CREATE TABLE addresses(
-#   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-#   country VARCHAR(32),
-#   city VARCHAR(32),
-#   street VARCHAR(32)
-# );
+CREATE TABLE addresses(
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  country VARCHAR(32),
+  city VARCHAR(32),
+  street VARCHAR(32)
+);
 
 CREATE TABLE user_roles(
   user_id INT NOT NULL,
@@ -27,6 +27,7 @@ CREATE TABLE user_roles(
 );
 
 CREATE TABLE contacts(
+  id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
   user_id INT,
   phone VARCHAR (20),
   email VARCHAR(20),
@@ -37,5 +38,5 @@ CREATE TABLE contacts(
 
 INSERT INTO user (firstname, lastname, age, experience) VALUES ('Firstame', 'Lastnameson',40, 999);
 # INSERT INTO addresses(country, city, street) VALUES ('USA','NY','1-st Avenue');
-INSERT INTO contacts VALUES (1,'+7-123-4567891','mail@dot.com',1);
+INSERT INTO contacts (user_id, phone, email, address_id) VALUES (1,'+7-123-4567891','mail@dot.com',1);
 INSERT INTO user_roles VALUE (1,'ROLE_ADMIN');

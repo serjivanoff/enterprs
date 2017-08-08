@@ -15,4 +15,5 @@ public interface UserService {
     void update (User user);
 
     User create(User user);
+    User getWithContacts(int id);
 }

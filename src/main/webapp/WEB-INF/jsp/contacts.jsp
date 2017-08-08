@@ -9,11 +9,13 @@
 <table>
     <th>Phone</th>
     <th>Email</th>
-    <c:forEach var="contact" items="user.contacts">
-        <tr>${contact.phone}</tr>
-        <tr>${contact.email}</tr>
+    <c:forEach var="contact" items="${contacts}">
+        <tr>
+            <td>${contact.phone}</td>
+            <td>${contact.email}</td>
+        </tr>
     </c:forEach>
-
 </table>
+<h2> <a href="/users">Back to Users List</ahref></h2>
 </body>
 </html>

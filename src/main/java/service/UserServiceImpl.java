@@ -36,4 +36,9 @@ public class UserServiceImpl implements UserService {
         Assert.notNull(user, "user must not be null");
         return userDao.save(user);
     }
+
+    @Override
+    public User getWithContacts(int id) {
+        return userDao.getWithContact(id);
+    }
 }

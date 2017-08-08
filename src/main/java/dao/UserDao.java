@@ -9,6 +9,7 @@ public interface UserDao {
     List<User> getAll();
 
     User getById(int id);
+    User getWithContact(int id);
 
     boolean removeById(int id);
 

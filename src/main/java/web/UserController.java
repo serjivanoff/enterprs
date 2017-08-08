@@ -17,12 +17,10 @@ public class UserController {
     UserService userService;
 
     @GetMapping(value = "/view/{id}")
-    public String view(@PathVariable int id){
-
+    public String view(Model model, @PathVariable int id){
+        model.addAttribute("contacts",userService.getWithContacts(id).getContacts());
         return "contacts";
     }
-
-
 
     @GetMapping(value = "/user")
     public ModelAndView userpage(){

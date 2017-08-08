@@ -39,4 +39,9 @@ public class UserDaoImpl implements UserDao {
         {return em.merge(user);}
         return user;
     }
+
+    @Override
+    public User getWithContact(int id) {
+        return em.createNamedQuery(User.GET_WITH_CONTACTS,User.class).setParameter("id",id).getSingleResult();
+    }
 }
